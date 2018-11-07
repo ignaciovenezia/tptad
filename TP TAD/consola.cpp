@@ -1,84 +1,142 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "consola.h"
 #include "funcionesmiscelaneas.h"
 #include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+#include <ctype.h>
+#include <algorithm>
+
+
 
 using namespace std;
 
+ST_DUENIO ingresarDatosDelDuenio() {
 
-void ingresarDatosVehiculo() {
-	std::cout << std::endl << std::endl;
-	ST_VEHICULO vehiculo;
-	std::string nombre = "";
-	std::string apellido = "";
-	std::string dni = "";
-	std::string telefono = "";
-	std::string email = "";
+	string nombre = "";
+	string apellido = "";
+	string dni = "";
+	string telefono = "";
+	string email = "";
 
-	std::cout << "Para ingresar un nuevo vehiculo precisamos los datos del amigo due�o, ingresar los siguientes datos: " << std::endl;
-
-	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-	std::cout << "Ingresar nombre: ";
-	std::getline(cin, nombre);
-	std::cout << std::endl;
+	cout << "Ingresar nombre: ";
+	getline(cin, nombre);
 	while (!esNombreCorrecto(nombre)) {
-		std::cout << "Nombre incorrecto. Solo se pueden usar letras y espacios." << std::endl;
-		std::cout << "Ingresar nombre: ";
-		std::getline(std::cin, nombre);
-		std::cout << std::endl;
+		cout << "Nombre incorrecto. Solo se pueden usar letras y espacios." << endl;
+		cout << "Ingresar nombre: ";
+		getline(cin, nombre);
 	}
-
-	std::cout << "Ingresar apellido: ";
-	std::getline(cin, apellido);
-	std::cout << std::endl;
+	cout << "Ingresar apellido: ";
+	getline(cin, apellido);
 	while (!esNombreCorrecto(apellido)) {
-		std::cout << "Apellido incorrecto. Solo se pueden usar letras y espacios." << std::endl;
-		std::cout << "Ingresar Apellido: ";
-		std::getline(cin, apellido);
-		std::cout << std::endl;
+		cout << "Apellido incorrecto. Solo se pueden usar letras y espacios." << endl;
+		cout << "Ingresar Apellido: ";
+		getline(cin, apellido);
 	}
-	std::cout << "Ingresar dni: ";
-	cin >> dni;
-	std::cout << std::endl;
-	while (!esNumeroCorrecto(dni)){
-		std::cout << "DNI incorrecto. Solo se pueden usar numeros." << std::endl;
-		std::cout << "Ingresar DNI: ";
-		std::getline(cin, dni);
-		std::cout << std::endl;
+	cout << "Ingresar DNI: ";
+	getline(cin, dni);
+	while (!esNumeroCorrecto(dni)) {
+		cout << "DNI incorrecto. Solo se pueden usar numeros." << endl;
+		cout << "Ingresar DNI: ";
+		getline(cin, dni);
 	}
-
-	std::cout << "Ingresar telefono: ";
-	cin >> telefono;
-	std::cout << std::endl;
+	cout << "Ingresar telefono: ";
+	getline(cin, telefono);
 	while (!esNumeroCorrecto(telefono)) {
-		std::cout << "Telefono incorrecto. Solo se pueden usar numeros." << std::endl;
-		std::cout << "Ingresar DNI: ";
-		cin >> telefono;
-		std::cout << std::endl;
+		cout << "Telefono incorrecto. Solo se pueden usar numeros." << endl;
+		cout << "Ingresar Telefono: ";
+		getline(cin, telefono);
 	}
-
-	std::cout << "Ingresar email: ";
-	cin >> email;
+	cout << "Ingresar email: ";
+	getline(cin, email);
 	while (!esEmailCorrecto(email)) {
-		std::cout << "Email incorrecto. Solo se pueden usar letras, numeros, arroba, guion, gion bajo y punto." << std::endl;
-		std::cout << "Ingresar Email: ";
-		std::getline(cin, email);
-		std::cout << std::endl;
+		cout << "Email incorrecto. Solo se pueden usar letras, numeros, arroba, guion, guion bajo y punto." << endl;
+		cout << "Ingresar Email: ";
+		getline(cin, email);
+	}
+	cout << endl;
+	cout << "Nombre: " << nombre << endl;
+	cout << "Apellido: " << apellido << endl;
+	cout << "DNI: " << dni << endl;
+	cout << "Telefono: " << telefono << endl;
+	cout << "Email: " << email << endl << endl;
+	cout << "Datos correctos? (y/n)" << endl;
+
+	char p;
+	bool isYN = false;
+	while (!isYN) {
+		cin >> p;
+		p = tolower(p);
+		cin.ignore();
+		switch (p) {
+		case 'y':
+			isYN = true;
+			return crearDuenio(nombre, apellido, dni, telefono, email);
+			break;
+		case 'n':
+			isYN = true;
+			system("cls");
+			return ingresarDatosDelDuenio();
+			break;
+		default:
+			cout << "Datos correctos? (y/n)";
+		}
 	}
 }
 
-void prenderConsola() {
-	fflush(stdin);
-	int n;
-	std::cout << "###########################" << std::endl,
-	std::cout << "1. Ingresar un vehiculo" << std::endl;
-	std::cout << "Ingrese la oppcion que quieras migo: ";
-	cin >> n;
+ST_VEHICULO ingresarDatosDelVehiculo(ST_DUENIO duenio) {
+	
+	string patente = "";
+	string tipo = "";
+	tipoVehiculo tipoV = AUTO;
+	tipoVehiculo vehiculo = AUTO;
+	cout << "Ingresar patente (AA999AA): ";
+	getline(cin, patente);
+	while (!esPatenteCorrecta(patente)) {
+		cout << "Patente incorrecta. Utilizar formato AA999AA" << endl;
+		cout << "Ingresar patente: ";
+		getline(cin, patente);
+	}
+	cout << "Ingresar tipo de vehiculo (auto/camioneta): ";
+	getline(cin, tipo);
+	while (!esTipoCorrecto(tipo)) {
+		cout << "Tipo incorrecto. Solo puede ser ´auto´ o ´camioneta´" << endl;
+		cout << "Ingresar tipo de vehiculo (auto/camioneta): ";
+		getline(cin, tipo);
+	}
+	if (tipo._Equal("camioneta"))
+	{
+		tipoV = CAMIONETA;
+	}
 
-	switch(n) {
-	case 1: 
-		ingresarDatosVehiculo();
+	return crearVehiculo(tipoV, patente, duenio);
+}
+
+
+void ingresarUnVehiculoAlGarage() {
+
+	cout << "Para ingresar un nuevo vehiculo precisamos los datos del amigo duenio, ingresar los siguientes datos: " << endl;
+	ST_DUENIO duenio = ingresarDatosDelDuenio();
+	cout << "Luego precisamos los datos del vehiculo, ingresar los siguientes datos: " << endl;
+	ST_VEHICULO vehiculo = ingresarDatosDelVehiculo(duenio);
+	std::cout << vehiculo.tipo << endl;
+	
+
+
+}
+	
+
+void prenderConsola() {
+	system("cls");
+	int n;
+	cout << "###########################" << endl,
+	cout << "1. Ingresar un vehiculo" << endl;
+	cout << "Ingrese la oppcion que quieras migo: ";
+	cin >> n;
+	cin.ignore();
+	switch (n){
+	case 1:
+		ingresarUnVehiculoAlGarage();
 		break;
 	}
 }

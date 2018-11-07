@@ -7,7 +7,7 @@ ST_COCHERA crearCochera(int id) {
 	ST_COCHERA cochera;
 	cochera._id = id;
 	cochera.fechaIngreso = "AAAAMMDDhhmm";//localTime;
-	cochera.vehiculo = crearVehiculo();
+	cochera.vehiculo = inicializarVehiculo();
 	cochera.tipo_alquiler = VACIA;
 	cochera.precio = 0;
 	for (int i = 0; i < CANT_PAGO; i++)

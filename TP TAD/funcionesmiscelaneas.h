@@ -11,3 +11,7 @@ bool esNombreCorrecto(std::string str);
 bool esNumeroCorrecto(std::string str);
 
 bool esEmailCorrecto(std::string str);
+
+bool esPatenteCorrecta(std::string str);
+
+bool esTipoCorrecto(std::string str);

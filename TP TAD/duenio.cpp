@@ -5,14 +5,14 @@ ST_DUENIO inicializarDuenio() {
 	ST_DUENIO duenio;
 	duenio.nombre = "";
 	duenio.apellido = "";
-	duenio.dni = -1;
-	duenio.telefono = -1;
+	duenio.dni = "";
+	duenio.telefono = "";
 	duenio.email = ""; 
 
 	return duenio;
 }
 
-ST_DUENIO crearDuenio(std::string nombre, std::string apellido, int dni, int telefono, std::string email) {
+ST_DUENIO crearDuenio(std::string nombre, std::string apellido, std::string dni, std::string telefono, std::string email) {
 	ST_DUENIO duenio;
 	duenio.nombre = nombre;
 	duenio.apellido = apellido;

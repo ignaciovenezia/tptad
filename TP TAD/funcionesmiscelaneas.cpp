@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <sstream>
+#include <iostream>
 #include <regex>
 
 #define LOCALTIME_LENGTH 12
@@ -45,14 +46,30 @@ std::string localTime()
 }
 
 bool esNombreCorrecto(std::string s) {
-	return !s.empty() || s.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ") == std::string::npos;
+	return !s.empty() && s.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ") == std::string::npos;
 }
 
 bool esEmailCorrecto(std::string s) {
-	return !s.empty() || s.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-") == std::string::npos;
+	return !s.empty() && s.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@._-") == std::string::npos;
 }
 
 bool esNumeroCorrecto(std::string s) { 
-	return !s.empty() || s.find_first_not_of("0123456789") == std::string::npos;
+	return !s.empty() && s.find_first_not_of("0123456789") == std::string::npos;
 }
 
+bool esPatenteCorrecta(std::string s) {
+	// hay que arreglar esto
+	/*std::regex r("([a-z][a-z][\d][\d][\d][a-z][a-z])");
+	std::smatch match;
+	std::regex_search(s, match, r);
+	std::cout << match[0] << std::endl;
+	bool a = !s.empty();
+	bool b = match[0] != NULL;
+	bool t =  s.length() == 7;
+	return t;*/
+	return true;
+}
+
+bool esTipoCorrecto(std::string s) {
+	return !s.empty() && (s._Equal("auto") || s._Equal("camioneta"));
+}

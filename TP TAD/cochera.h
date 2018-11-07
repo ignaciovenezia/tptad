@@ -8,7 +8,7 @@ enum tipoAlquiler {
 	VACIA,
 	HORA,
 	DIA,
-	MES,
+	MES
 };
 
 typedef struct cochera {

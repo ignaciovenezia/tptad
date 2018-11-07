@@ -7,9 +7,11 @@ enum tipoVehiculo {
 };
 
 typedef struct vehiculo {
-	int tipo; //tipo_vehiculo
+	tipoVehiculo tipo;
 	std::string patente;
 	ST_DUENIO duenio;
 }ST_VEHICULO;
 
-ST_VEHICULO crearVehiculo();
+ST_VEHICULO inicializarVehiculo();
+
+ST_VEHICULO crearVehiculo(tipoVehiculo tipo, std::string patente, ST_DUENIO duenio);
