@@ -4,16 +4,21 @@
 #define ERROR_LENGTH 40
 
 #include <stdio.h>
+#include <string>
 
 enum ERROR_TYPE {
 	ERR_OK,
-	ERR_NO_GARAGE
-
+	ERR_NO_GARAGE,
+	ERR_NOMBRE_INCORRECTO,
+	ERR_APELLIDO_INCORRECTO,
+	ERR_DNI_INCORRECTO,
+	ERR_TELEFONO_INCORRECTO,
+	ERR_EMAIL_INCORRECTO,
 };
 
 typedef struct error {
-	int err_no;
-	char err_desc[ERROR_LENGTH + 1];
+	int tipoDeError;
+	std::string err_desc;
 } ST_ERROR;
 
 
@@ -24,7 +29,7 @@ typedef struct error {
  * @param[in] {char *} description descripción del error.
  * @return {ERROR_ST} error creado
  */
-ST_ERROR createError(ERROR_TYPE error, char description[ERROR_LENGTH + 1]);
+ST_ERROR createError(ERROR_TYPE error, std::string);
 
 /**
  * Imprime la descripción del error por pantalla. Agrega fecha y hora.

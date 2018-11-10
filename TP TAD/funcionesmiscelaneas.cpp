@@ -58,7 +58,7 @@ bool esNumeroCorrecto(std::string s) {
 }
 
 bool esPatenteCorrecta(std::string s) {
-	std::regex r("[a-z][a-z][0-9][0-9][0-9][a-z][a-z]");
+	std::regex r("[a-zA-Z][a-zA-Z][0-9][0-9][0-9][a-zA-Z][a-zA-Z]");
 	bool a = !s.empty();
 	bool b = std::regex_match(s, r);
 	bool t =  s.length() == 7;

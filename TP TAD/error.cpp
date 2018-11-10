@@ -2,13 +2,14 @@
 #include "error.h"
 #include <string.h>
 #include "funcionesmiscelaneas.h"
+#include <iostream>
 
 
 
-ST_ERROR createError(ERROR_TYPE errorNumber, char description[ERROR_LENGTH + 1]) {
+ST_ERROR createError(ERROR_TYPE errorNumber, std::string description) {
 	ST_ERROR error;
-	error.err_no = errorNumber;
-	strcpy_s(error.err_desc, description);
+	error.tipoDeError = errorNumber;
+	error.err_desc = description;
 
 	return error;
 }
@@ -16,13 +17,16 @@ ST_ERROR createError(ERROR_TYPE errorNumber, char description[ERROR_LENGTH + 1])
 void logError(ST_ERROR error) {
 	char timeString[TIME_STRING_LENGTH + 1];
 	getTimeAsString(timeString);
-	printf("%s: %s\n", timeString, error.err_desc);
+	std::cout << timeString << ": " << error.err_desc << std::endl;
+	//printf("%s: %s\n", timeString, error.err_desc);
 }
 
 void printError(ST_ERROR error, char *text) {
-	printf("%s", error.err_desc);
+	std::cout << error.err_desc << std::endl;
+	//printf("%s", error.err_desc);
 
 	if (text != NULL) {
-		printf(". %s\n", text);
+		std::cout << text << std::endl;
+		//printf(". %s\n", text);
 	}
 }

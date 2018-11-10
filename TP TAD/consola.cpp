@@ -11,7 +11,7 @@
 
 using namespace std;
 
-ST_DUENIO ingresarDatosDelDuenio() {
+/*ST_DUENIO ingresarDatosDelDuenio() {
 
 	string nombre = "";
 	string apellido = "";
@@ -139,4 +139,4 @@ void prenderConsola() {
 		ingresarUnVehiculoAlGarage();
 		break;
 	}
-}
+}*/
