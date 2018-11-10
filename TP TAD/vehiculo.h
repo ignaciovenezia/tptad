@@ -4,6 +4,7 @@
 enum tipoVehiculo {
 	AUTO,
 	CAMIONETA,
+	OTRO,
 };
 
 typedef struct vehiculo {

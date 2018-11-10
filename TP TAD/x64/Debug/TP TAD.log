@@ -1,4 +1,11 @@
 ﻿  pch.cpp
+  cochera.cpp
+  consola.cpp
+  duenio.cpp
+  error.cpp
+  funcionesmiscelaneas.cpp
+  garage.cpp
   TP TAD.cpp
-c:\users\a426365\source\repos\tptad\tp tad\tp tad.cpp(74): error C2275: 'ST_DUENIO': uso no válido de este tipo como expresión
-  c:\users\a426365\source\repos\tptad\tp tad\duenio.h(11): note: vea la declaración de 'ST_DUENIO'
+  vehiculo.cpp
+  Generando código...
+  TP TAD.vcxproj -> C:\Users\a426365\source\repos\tptad\x64\Debug\TP TAD.exe
