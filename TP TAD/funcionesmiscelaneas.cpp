@@ -61,10 +61,10 @@ bool esPatenteCorrecta(std::string s) {
 	std::regex r("[a-zA-Z][a-zA-Z][0-9][0-9][0-9][a-zA-Z][a-zA-Z]");
 	bool a = !s.empty();
 	bool b = std::regex_match(s, r);
-	bool t =  s.length() == 7;
+	bool t = s.length() == 7;
 	return a && b && t;
 }
 
-bool esTipoCorrecto(std::string s) {
-	return !s.empty() && (s._Equal("auto") || s._Equal("camioneta"));
+bool esTipoCorrecto(tipoVehiculo tipo) {
+	return tipo == AUTO || tipo == CAMIONETA;
 }
