@@ -1,3 +1,11 @@
 ﻿  pch.cpp
   TP TAD.cpp
-  TP TAD.vcxproj -> C:\Users\a426365\source\repos\tptad\x64\Debug\TP TAD.exe
+  cochera.cpp
+  consola.cpp
+  duenio.cpp
+  error.cpp
+  funcionesmiscelaneas.cpp
+  garage.cpp
+  vehiculo.cpp
+  Generating Code...
+  TP TAD.vcxproj -> C:\Users\Nico Senra\Source\Repos\tptad\x64\Debug\TP TAD.exe

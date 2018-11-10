@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "vehiculo.h"
 #define TIME_STRING_LENGTH 18
 
 void getTimeAsString(char[TIME_STRING_LENGTH + 1]);
@@ -14,4 +15,4 @@ bool esEmailCorrecto(std::string str);
 
 bool esPatenteCorrecta(std::string str);
 
-bool esTipoCorrecto(std::string str);
+bool esTipoCorrecto(tipoVehiculo tipo);
