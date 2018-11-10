@@ -54,6 +54,6 @@ ST_ERROR crearDuenio(std::string nombre, std::string apellido, std::string dni, 
 		return errorduenio;
 	}
 
-	errorduenio = createError(ERR_OK, "Duenio Ingresado OK");
+	errorduenio = createError(ERR_OK, "Duenio Creado OK");
 	return errorduenio;
 }

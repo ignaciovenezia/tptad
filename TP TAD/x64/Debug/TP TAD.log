@@ -1,3 +1,4 @@
 ﻿  pch.cpp
   TP TAD.cpp
-  TP TAD.vcxproj -> C:\Users\a426365\source\repos\tptad\x64\Debug\TP TAD.exe
+c:\users\a426365\source\repos\tptad\tp tad\tp tad.cpp(74): error C2275: 'ST_DUENIO': uso no válido de este tipo como expresión
+  c:\users\a426365\source\repos\tptad\tp tad\duenio.h(11): note: vea la declaración de 'ST_DUENIO'
