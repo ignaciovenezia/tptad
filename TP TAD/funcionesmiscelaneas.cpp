@@ -45,6 +45,13 @@ std::string localTime()
 	return oss.str();
 }
 
+int mesActual() {
+	time_t theTime = time(NULL);
+	struct tm *aTime = localtime(&theTime);
+	int month = aTime->tm_mon + 1; // Month is 0 – 11, add 1 to get a jan-dec 1-12 concept
+	return month;
+}
+
 bool esNombreCorrecto(std::string s) {
 	return !s.empty() && s.find_first_not_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ") == std::string::npos;
 }

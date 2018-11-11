@@ -32,7 +32,7 @@ ST_ERROR crearDuenio(std::string nombre, std::string apellido, std::string dni, 
 	duenio.dni = dni;
 	duenio.telefono = telefono;
 	duenio.email = email;
-	//Chequear si los datos son correctos
+	//Chequear si los datos son correctos y si no, returnear un error.
 	if (!esNombreCorrecto(nombre)) {
 		errorduenio = createError(ERR_NOMBRE_INCORRECTO, "Nombre incorrecto.");
 		return errorduenio;
@@ -53,7 +53,7 @@ ST_ERROR crearDuenio(std::string nombre, std::string apellido, std::string dni, 
 		errorduenio = createError(ERR_EMAIL_INCORRECTO, "EMAIL incorrecto.");
 		return errorduenio;
 	}
-
+	//Todo Okay, entonces returneamos el ERR_OK
 	errorduenio = createError(ERR_OK, "Duenio Creado OK");
 	return errorduenio;
 }
