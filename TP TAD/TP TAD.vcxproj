@@ -153,9 +153,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="cochera.h" />
-    <ClInclude Include="consola.h" />
     <ClInclude Include="duenio.h" />
     <ClInclude Include="error.h" />
+    <ClInclude Include="fecha.h" />
     <ClInclude Include="funcionesmiscelaneas.h" />
     <ClInclude Include="garage.h" />
     <ClInclude Include="pch.h" />
@@ -163,9 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cochera.cpp" />
-    <ClCompile Include="consola.cpp" />
     <ClCompile Include="duenio.cpp" />
     <ClCompile Include="error.cpp" />
+    <ClCompile Include="fecha.cpp" />
     <ClCompile Include="funcionesmiscelaneas.cpp" />
     <ClCompile Include="garage.cpp" />
     <ClCompile Include="pch.cpp">

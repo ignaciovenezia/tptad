@@ -8,9 +8,9 @@
 
 static ST_COCHERA cocheras[CANT_COCHERAS];
 
-ST_ERROR ingresarVehiculo(ST_VEHICULO vehiculo, tipoAlquiler tipo, std::string fechaIngreso, ST_COCHERA &cochera);
+ST_ERROR ingresarVehiculo(ST_VEHICULO vehiculo, tipoAlquiler tipo, ST_FECHA fechaIngreso, ST_COCHERA &cochera);
 
-ST_ERROR egresarVehiculo(std::string patente, std::string fechaEgreso);
+ST_ERROR egresarVehiculo(std::string patente, float &valorAPagar);
 
 ST_ERROR moverVehiculo(ST_COCHERA origen);
 

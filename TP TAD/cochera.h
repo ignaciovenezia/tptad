@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "vehiculo.h"
+#include "fecha.h"
 
 #define CANT_PAGO 12
 
@@ -14,12 +15,12 @@ enum tipoAlquiler {
 typedef struct cochera {
 	int _id;
 	ST_VEHICULO vehiculo;
-	std::string fechaIngreso;
+	ST_FECHA fechaIngreso;
 	float precio;
 	int tipo_alquiler;
-	int pago[CANT_PAGO];
+	float pago[CANT_PAGO];
 }ST_COCHERA;
 
 void llenarCocheras(ST_COCHERA vec[], int n);
 
-ST_COCHERA crearCochera(int);
+ST_COCHERA inicializarCochera(int);

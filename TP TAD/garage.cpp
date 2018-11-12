@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "garage.h"
 #include "funcionesmiscelaneas.h"
+#include "fecha.h"
 
 float calcularPrecio(ST_VEHICULO vehiculo, tipoAlquiler tipo) {
 	float precio = 0.0f;
@@ -24,12 +25,36 @@ float calcularPrecio(ST_VEHICULO vehiculo, tipoAlquiler tipo) {
 		else
 			precio = 75.0f;
 	}
-
 	//vehiculo.tipo == AUTO ? precio = 2500 : precio = 4000;
 	return precio;
 }
 
-ST_ERROR ingresarVehiculo(ST_VEHICULO vehiculo, tipoAlquiler tipo, std::string fechaIngreso, ST_COCHERA &cochera) {
+ST_ERROR calcularPago(ST_COCHERA cochera, float pago) {
+	ST_ERROR error;
+	ST_FECHA fechaActual = localTime();
+	if (cochera.tipo_alquiler == MES && cochera.pago[fechaActual.mes - 1] != 0.0f) {
+		pago = cochera.pago[fechaActual.mes - 1];
+		error = createError(ERR_OK, "");
+		return error;
+	}
+	if (cochera.tipo_alquiler == DIA) {
+		if (cochera.fechaIngreso.mes < fechaActual.mes)
+			pago = cochera.precio * (getDiasDelMes(cochera.fechaIngreso.mes) - cochera.fechaIngreso.dia + 1 + fechaActual.dia);
+		else
+			pago = cochera.precio * (fechaActual.dia - cochera.fechaIngreso.dia);
+		error = createError(ERR_OK, "");
+		return error;
+	}
+	if (cochera.tipo_alquiler == HORA) {
+		pago = cochera.precio * (fechaActual.hora - cochera.fechaIngreso.hora);
+		error = createError(ERR_OK, "");
+		return error;
+	}
+	error = createError(ERR_COCHERA_A_EGRESAR_VACIA, "La cochera a egresar esta vacia.");
+	return error;
+}
+
+ST_ERROR ingresarVehiculo(ST_VEHICULO vehiculo, tipoAlquiler tipo, ST_FECHA fechaIngreso, ST_COCHERA &cochera) {
 	ST_ERROR error;
 	for (int i = 0; i < CANT_COCHERAS; i++)
 	{
@@ -37,9 +62,9 @@ ST_ERROR ingresarVehiculo(ST_VEHICULO vehiculo, tipoAlquiler tipo, std::string f
 			cochera._id = cocheras[i]._id;
 			cochera.vehiculo = vehiculo;
 			cochera.tipo_alquiler = tipo;
-			cochera.fechaIngreso = fechaIngreso; //localTime;
+			cochera.fechaIngreso = localTime();
 			cochera.precio = calcularPrecio(vehiculo, tipo);
-			for (int i = mesActual(); i < CANT_PAGO; i++)
+			for (int i = localTime().mes; i < CANT_PAGO; i++)
 			{
 				cochera.pago[i] = cochera.precio;
 			}
@@ -67,13 +92,19 @@ ST_ERROR buscarCocheraPorPatente(std::string patente, ST_COCHERA &cochera) {
 	return error;
 }
 
-ST_ERROR egresarVehiculo(std::string patente, std::string fechaEgreso) {
+ST_ERROR egresarVehiculo(std::string patente, float &valorAPagar) {
 	ST_COCHERA cochera;
 	ST_ERROR error = buscarCocheraPorPatente(patente, cochera);
 	if (error.tipoDeError != ERR_OK) {
 		return error;
 	}
-	
+	error = calcularPago(cochera, valorAPagar);
+	if (error.tipoDeError != ERR_OK) {
+		return error;
+	}
+	error = createError(ERR_OK, "Vehiculo egresado con exito.");
+	cochera = inicializarCochera(cochera._id);
+	return error;
 }
 
 ST_ERROR moverVehiculo(ST_COCHERA origen);

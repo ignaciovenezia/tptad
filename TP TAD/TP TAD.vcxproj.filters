@@ -42,7 +42,7 @@
     <ClInclude Include="garage.h">
       <Filter>Source Files\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="consola.h">
+    <ClInclude Include="fecha.h">
       <Filter>Source Files\Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClCompile Include="garage.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="consola.cpp">
+    <ClCompile Include="fecha.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,10 +3,10 @@
 #include "vehiculo.h"
 
 
-ST_COCHERA crearCochera(int id) {
+ST_COCHERA inicializarCochera(int id) {
 	ST_COCHERA cochera;
 	cochera._id = id;
-	cochera.fechaIngreso = "AAAAMMDDhhmm";//localTime;
+	cochera.fechaIngreso = localTime();
 	cochera.vehiculo = inicializarVehiculo();
 	cochera.tipo_alquiler = VACIA;
 	cochera.precio = 0;
@@ -22,6 +22,6 @@ ST_COCHERA crearCochera(int id) {
 void llenarCocheras(ST_COCHERA vec[], int n) {
 	for (int i = 0; i < n; i++)
 	{
-		vec[i] = crearCochera(i);
+		vec[i] = inicializarCochera(i);
 	}
 }
