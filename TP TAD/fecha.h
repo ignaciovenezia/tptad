@@ -13,4 +13,6 @@ typedef struct fecha {
 
 ST_FECHA localTime();
 
+ST_FECHA crearFecha(int anio, int mes, int dia, int hora, int minutos);
+
 int getDiasDelMes(int mes);

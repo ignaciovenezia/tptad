@@ -21,6 +21,4 @@ typedef struct cochera {
 	float pago[CANT_PAGO];
 }ST_COCHERA;
 
-void llenarCocheras(ST_COCHERA vec[], int n);
-
 ST_COCHERA inicializarCochera(int);

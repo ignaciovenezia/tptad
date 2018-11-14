@@ -21,7 +21,23 @@ ST_FECHA localTime() {
 	fecha.minutos = aTime->tm_min;
 
 	std::ostringstream oss;
-	oss << fecha.anio << fecha.mes << fecha.dia << fecha.hora << fecha.minutos;
+	oss << fecha.dia << "/" << fecha.mes << "/" << fecha.anio;
+	fecha.fechaCompleta = oss.str();
+
+	return fecha;
+}
+
+ST_FECHA crearFecha(int anio, int mes, int dia, int hora, int minutos) {
+	ST_FECHA fecha;
+
+	fecha.dia = dia;
+	fecha.mes = mes;
+	fecha.anio = anio;
+	fecha.hora = hora;
+	fecha.minutos = minutos;
+
+	std::ostringstream oss;
+	oss << fecha.dia << "/" << fecha.mes << "/" << fecha.anio;
 	fecha.fechaCompleta = oss.str();
 
 	return fecha;
@@ -44,5 +60,7 @@ int getDiasDelMes(int mes) {
 		return 30;
 	case 2:
 		return 28;
+	default:
+		return -1;
 	}
 }

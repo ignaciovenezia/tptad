@@ -33,9 +33,6 @@
     <ClInclude Include="cochera.h">
       <Filter>Source Files\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="vehiculo.h">
-      <Filter>Source Files\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="duenio.h">
       <Filter>Source Files\Headers</Filter>
     </ClInclude>
@@ -44,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="fecha.h">
       <Filter>Source Files\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="vehiculo.h">
+      <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

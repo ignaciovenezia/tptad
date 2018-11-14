@@ -18,10 +18,3 @@ ST_COCHERA inicializarCochera(int id) {
 
 	return cochera;
 }
-
-void llenarCocheras(ST_COCHERA vec[], int n) {
-	for (int i = 0; i < n; i++)
-	{
-		vec[i] = inicializarCochera(i);
-	}
-}
