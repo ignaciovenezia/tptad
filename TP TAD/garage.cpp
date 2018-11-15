@@ -3,6 +3,7 @@
 #include "funcionesmiscelaneas.h"
 #include "fecha.h"
 #include <string>
+#include <sstream>
 #include <iostream>
 
 float calcularPrecio(ST_VEHICULO vehiculo, tipoAlquiler tipo) {
@@ -82,12 +83,20 @@ ST_ERROR ingresarVehiculo(ST_VEHICULO vehiculo, tipoAlquiler tipo, ST_FECHA fech
 			cochera.tipo_alquiler = tipo;
 			cochera.fechaIngreso = fechaIngreso;
 			cochera.precio = calcularPrecio(vehiculo, tipo);
-			for (int i = 0; i < CANT_PAGO && tipo == MES; i++)
-			{
-				if (i < fechaIngreso.mes)
-					cochera.pago[i] = 0.0f;
-				else
-					cochera.pago[i] = cochera.precio;
+			if (tipo == MES) {
+				for (int i = 0; i < CANT_PAGO; i++)
+				{
+					if (i < fechaIngreso.mes)
+						cochera.pago[i] = 0.0f;
+					else
+						cochera.pago[i] = cochera.precio;
+				}
+			}
+			else {
+				for (int i = 0; i < CANT_PAGO; i++)
+				{
+						cochera.pago[i] = 0.0f;
+				}
 			}
 			_cocheras[i] = cochera;
 			error = createError(ERR_OK, "Vehiculo ingresado correctamente a la cochera ID: " + std::to_string(cochera._id) + ".");
@@ -153,7 +162,11 @@ ST_ERROR moverVehiculo(int idOrigen, ST_COCHERA &destino) {
 			_cocheras[i] = cocheraOrigen;
 			destino = _cocheras[i];
 			_cocheras[idOrigen] = inicializarCochera(idOrigen); 
-			error = createError(ERR_OK, "Cochera movida con exito.");
+
+			std::ostringstream oss;
+			oss << "Cochera movida con exito a la cochera ID: " << i;
+
+			error = createError(ERR_OK, oss.str());
 			return error;
 		}		
 	}
@@ -169,7 +182,7 @@ void listarDeudores(int mes) {
 	{
 		totalDeuda = cantDeuda(_cocheras[i], mes);
 		if (_cocheras[i].tipo_alquiler == MES && totalDeuda != 0.0f) {
-			std::cout << "Cochera: " << _cocheras[i]._id << std::endl << "Propietario Automovil: " << _cocheras[i].vehiculo.duenio.nombre << " " << _cocheras[i].vehiculo.duenio.apellido << std::endl;
+			std::cout << "Cochera ID: " << _cocheras[i]._id << std::endl << "Propietario Automovil: " << _cocheras[i].vehiculo.duenio.nombre << " " << _cocheras[i].vehiculo.duenio.apellido << std::endl;
 			std::cout << "Alquila desde: " << _cocheras[i].fechaIngreso.fechaCompleta << std::endl;
 			std::cout << "Meses que adeuda: ";
 			for (int j = 0; j < mes; j++)
@@ -230,20 +243,30 @@ void listarCobranzasMensuales() {
 	bool flag = false;
 	std::cout << "Importe a cobrar: " << cocherasOrdenadasPorPago[i].pago[localt.mes] << std::endl;
 
-	while ((i < CANT_COCHERAS || (cocherasOrdenadasPorPago[i].pago[localt.mes] == lastPago)))
+	for (int i = 0; i < CANT_COCHERAS - 1; i++)
 	{
-		for (int j = 0; j < CANT_COCHERAS && flag == false; j++)
-		{
-			if (cocherasOrdenadasPorApellido[j].pago[localt.mes] == lastPago) {
-				std::cout << "		" << cocherasOrdenadasPorApellido[j].vehiculo.duenio.apellido << " " << cocherasOrdenadasPorApellido[j].vehiculo.duenio.nombre << std::endl;
+		//Si la cochera actualmente siendo chequeada es de tipo mes
+		if (cocherasOrdenadasPorPago[i].tipo_alquiler == MES) {
+			//Por cada cochera ordenada por apellido y no reseteamos el for
+			for (int j = 0; j < CANT_COCHERAS && flag == false; j++)
+			{
+				//Si el pago de este mes de la cochera ordenada por apellido es igual al pago que estamos chequeando
+				if (cocherasOrdenadasPorApellido[j].pago[localt.mes] == lastPago) {
+					//Printear el nombre
+					std::cout << "		" << cocherasOrdenadasPorApellido[j].vehiculo.duenio.apellido << " " << cocherasOrdenadasPorApellido[j].vehiculo.duenio.nombre << std::endl;
+				}
+			}
+			//Flageamos que termino el for
+			flag = true;
+			//Si el pago actual de la cochera ordenada por pago es diferente a cero y es menor al pago actualmente chequeado
+			if (cocherasOrdenadasPorPago[i + 1].pago[localt.mes] != 0.0f && cocherasOrdenadasPorPago[i + 1].pago[localt.mes] < lastPago) {
+				//Actualizar el pago chequeado al nuevo pago.
+				lastPago = cocherasOrdenadasPorPago[i + 1].pago[localt.mes];
+				//Printear el nuevo pago.
+				std::cout << std::endl << "Importe a cobrar: " << cocherasOrdenadasPorPago[i + 1].pago[localt.mes] << std::endl;
+				//Resetear el for para printear todos los nombres de nuestro nuevo pago.
+				flag = false;
 			}
 		}
-		flag = true;
-		if (cocherasOrdenadasPorPago[i].pago[localt.mes] != 0.0f && cocherasOrdenadasPorPago[i].pago[localt.mes] < lastPago) {
-			lastPago = cocherasOrdenadasPorPago[i].pago[localt.mes];
-			std::cout << std::endl << "Importe a cobrar: " << cocherasOrdenadasPorPago[i].pago[localt.mes] << std::endl;
-			flag = false;
-		}
-		i++;
 	}
 }
