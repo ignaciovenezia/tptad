@@ -177,6 +177,9 @@
     <ClCompile Include="TP TAD.cpp" />
     <ClCompile Include="vehiculo.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

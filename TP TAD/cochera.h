@@ -5,6 +5,8 @@
 
 #define CANT_PAGO 12
 
+/** @brief tipo de alquiler de una cochera.
+*/
 enum tipoAlquiler {
 	VACIA,
 	HORA,
@@ -17,8 +19,12 @@ typedef struct cochera {
 	ST_VEHICULO vehiculo;
 	ST_FECHA fechaIngreso;
 	float precio;
-	int tipo_alquiler;
+	tipoAlquiler tipo_alquiler;
 	float pago[CANT_PAGO];
 }ST_COCHERA;
 
+
+/** @brief inicializa una cochera default
+* @return ST_COSCHERA: cochera default.
+*/
 ST_COCHERA inicializarCochera(int);
