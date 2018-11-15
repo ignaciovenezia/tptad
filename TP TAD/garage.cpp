@@ -3,6 +3,7 @@
 #include "funcionesmiscelaneas.h"
 #include "fecha.h"
 #include <string>
+#include <sstream>
 #include <iostream>
 
 float calcularPrecio(ST_VEHICULO vehiculo, tipoAlquiler tipo) {
@@ -161,7 +162,11 @@ ST_ERROR moverVehiculo(int idOrigen, ST_COCHERA &destino) {
 			_cocheras[i] = cocheraOrigen;
 			destino = _cocheras[i];
 			_cocheras[idOrigen] = inicializarCochera(idOrigen); 
-			error = createError(ERR_OK, "Cochera movida con exito.");
+
+			std::ostringstream oss;
+			oss << "Cochera movida con exito a la cochera ID: " << i;
+
+			error = createError(ERR_OK, oss.str());
 			return error;
 		}		
 	}
@@ -177,7 +182,7 @@ void listarDeudores(int mes) {
 	{
 		totalDeuda = cantDeuda(_cocheras[i], mes);
 		if (_cocheras[i].tipo_alquiler == MES && totalDeuda != 0.0f) {
-			std::cout << "Cochera: " << _cocheras[i]._id << std::endl << "Propietario Automovil: " << _cocheras[i].vehiculo.duenio.nombre << " " << _cocheras[i].vehiculo.duenio.apellido << std::endl;
+			std::cout << "Cochera ID: " << _cocheras[i]._id << std::endl << "Propietario Automovil: " << _cocheras[i].vehiculo.duenio.nombre << " " << _cocheras[i].vehiculo.duenio.apellido << std::endl;
 			std::cout << "Alquila desde: " << _cocheras[i].fechaIngreso.fechaCompleta << std::endl;
 			std::cout << "Meses que adeuda: ";
 			for (int j = 0; j < mes; j++)
