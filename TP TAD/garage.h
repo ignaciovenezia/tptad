@@ -4,7 +4,7 @@
 #include "vehiculo.h"
 #include <string>
 
-#define CANT_COCHERAS 5 // numero de cocheras
+#define CANT_COCHERAS 4 // numero de cocheras
 
 static ST_COCHERA _cocheras[CANT_COCHERAS]; 
 /*
