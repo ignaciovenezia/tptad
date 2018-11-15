@@ -77,13 +77,12 @@ ST_ERROR ingresarVehiculo(ST_VEHICULO vehiculo, tipoAlquiler tipo, ST_FECHA fech
 	for (int i = 0; i < CANT_COCHERAS; i++)
 	{
 		if (_cocheras[i].tipo_alquiler == VACIA) {
-			std::cout << _cocheras[i]._id << std::endl;
 			cochera._id = _cocheras[i]._id;
 			cochera.vehiculo = vehiculo;
 			cochera.tipo_alquiler = tipo;
 			cochera.fechaIngreso = fechaIngreso;
 			cochera.precio = calcularPrecio(vehiculo, tipo);
-			for (int i = 0; i < CANT_PAGO; i++)
+			for (int i = 0; i < CANT_PAGO && tipo == MES; i++)
 			{
 				if (i < fechaIngreso.mes)
 					cochera.pago[i] = 0.0f;
@@ -225,22 +224,24 @@ void listarCobranzasMensuales() {
 	ordenarCocherasPorPago(cocherasOrdenadasPorPago);
 	ordenarCocherasPorApellido(cocherasOrdenadasPorApellido);
 
-	float lastPago = cocherasOrdenadasPorPago[0].pago[localTime().mes];
+	ST_FECHA localt = localTime();
+	float lastPago = cocherasOrdenadasPorPago[0].pago[localt.mes];
 	int i = 0;
 	bool flag = false;
-	std::cout << "Importe a cobrar: " << cocherasOrdenadasPorPago[i].pago[localTime().mes] << std::endl;
-	while ((i < CANT_COCHERAS || cocherasOrdenadasPorPago[i].pago[localTime().mes] == lastPago) && cocherasOrdenadasPorPago[i].pago[localTime().mes] != 0.0f)
+	std::cout << "Importe a cobrar: " << cocherasOrdenadasPorPago[i].pago[localt.mes] << std::endl;
+
+	while ((i < CANT_COCHERAS || (cocherasOrdenadasPorPago[i].pago[localt.mes] == lastPago)))
 	{
 		for (int j = 0; j < CANT_COCHERAS && flag == false; j++)
 		{
-			if (cocherasOrdenadasPorApellido[j].pago[localTime().mes] == lastPago) {
+			if (cocherasOrdenadasPorApellido[j].pago[localt.mes] == lastPago) {
 				std::cout << "		" << cocherasOrdenadasPorApellido[j].vehiculo.duenio.apellido << " " << cocherasOrdenadasPorApellido[j].vehiculo.duenio.nombre << std::endl;
 			}
 		}
 		flag = true;
-		if (cocherasOrdenadasPorPago[i].pago[localTime().mes] < lastPago) {
-			lastPago = cocherasOrdenadasPorPago[i].pago[localTime().mes];
-			std::cout << std::endl << "Importe a cobrar: " << cocherasOrdenadasPorPago[i].pago[localTime().mes] << std::endl;
+		if (cocherasOrdenadasPorPago[i].pago[localt.mes] != 0.0f && cocherasOrdenadasPorPago[i].pago[localt.mes] < lastPago) {
+			lastPago = cocherasOrdenadasPorPago[i].pago[localt.mes];
+			std::cout << std::endl << "Importe a cobrar: " << cocherasOrdenadasPorPago[i].pago[localt.mes] << std::endl;
 			flag = false;
 		}
 		i++;
