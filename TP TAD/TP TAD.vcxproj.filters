@@ -43,7 +43,7 @@
       <Filter>Source Files\Headers</Filter>
     </ClInclude>
     <ClInclude Include="vehiculo.h">
-      <Filter>Source Files\src</Filter>
+      <Filter>Source Files\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
